@@ -1,12 +1,14 @@
-from dash import html
+from dash import html, Dash
 from dash.dcc import Interval
 from dash.dependencies import Input, Output
 from datetime import datetime
 from loguru import logger
 
-from app import app
 from telnet_func import telnet_connection
 
+
+app = Dash(__name__, suppress_callback_exceptions=True)
+server = app.server
 
 app.layout = html.Div([
     html.Title("Beskyd VPN Checking"),
@@ -20,7 +22,7 @@ app.layout = html.Div([
     Interval(
         id='interval_component',
         max_intervals=-1,
-        interval=1000*60,  # in milliseconds * seconds
+        interval=1000*60*15,  # in milliseconds, 1000*60*15 = 15 mins.
         n_intervals=0,
     ),
     ],
@@ -37,7 +39,7 @@ def response_output(value):
     t = datetime.now()
     tt = t.strftime("%H:%M:%S")
     last_update = t.strftime("%d.%m.%Y %H:%M:%S")
-    logger.info(f"{tt} - {result}")
+    # logger.info(f"{tt} - {result}")
     match result:
         case "Success":
             return html.Div(
@@ -81,5 +83,4 @@ def response_output(value):
 
 
 if __name__ == '__main__':
-    # timer.start()
-    app.run_server(debug=True)
+    app.run(debug=False)
