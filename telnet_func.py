@@ -1,8 +1,10 @@
 # from loguru import logger
+from dotenv import dotenv_values
 from telnetlib import Telnet
 
-host = "46.149.176.84"  # VPN
-port = 1723
+config = dotenv_values(".env")
+host = config['HOST']
+port = int(config['PORT'])
 timeout = 1
 
 
