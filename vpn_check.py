@@ -40,8 +40,7 @@ def response_output(value):
     tt = t.strftime("%H:%M:%S")
     last_update = t.strftime("%d.%m.%Y %H:%M:%S")
     # logger.info(f"{tt} - {result}")
-    match result:
-        case "Success":
+    if result == "Success":
             return html.Div(
                 style={'color': '#145A32'},
                 children=[
@@ -55,31 +54,31 @@ def response_output(value):
                     html.H4(f'Last update: {last_update}'),
                     html.Br(),
                 ])
-        case "TimeoutError":
-            return html.Div(
-                style={'color': 'red'},
-                children=[
-                    html.H3("Timeout Error"),
-                    html.Br(),
-                    html.Img(src=app.get_asset_url('error.png'), width=100, alt="Error"),
-                    html.Br(),
-                    html.Br(),
-                    html.H4("The connection to the VPN is not working!"),
-                    html.Br(),
-                    html.H4(f'Last update: {last_update}'),
-                    html.Br(),
-                ])
-        case _:
-            return html.Div(
-                style={'color': 'red'},
-                children=[
-                    html.H3("Something is wrong..."),
-                    html.Br(),
-                    html.H4("Ping function doesn't work!"),
-                    html.Br(),
-                    html.H4(f'Last update: {last_update}'),
-                    html.Br(),
-                ])
+    elif result == "TimeoutError":
+        return html.Div(
+            style={'color': 'red'},
+            children=[
+                html.H3("Timeout Error"),
+                html.Br(),
+                html.Img(src=app.get_asset_url('error.png'), width=100, alt="Error"),
+                html.Br(),
+                html.Br(),
+                html.H4("The connection to the VPN is not working!"),
+                html.Br(),
+                html.H4(f'Last update: {last_update}'),
+                html.Br(),
+            ])
+    else:
+        return html.Div(
+            style={'color': 'red'},
+            children=[
+                html.H3("Something is wrong..."),
+                html.Br(),
+                html.H4("Ping function doesn't work!"),
+                html.Br(),
+                html.H4(f'Last update: {last_update}'),
+                html.Br(),
+            ])
 
 
 if __name__ == '__main__':
