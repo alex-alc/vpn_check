@@ -1,9 +1,11 @@
 from dash import html, Dash
 from dash.dcc import Interval
 from dash.dependencies import Input, Output
-from datetime import datetime
-from loguru import logger
+from datetime import datetime, timedelta
+import pytz
+# from loguru import logger
 
+# from messenger import notification
 from telnet_func import telnet_connection
 
 
@@ -35,13 +37,28 @@ app.layout = html.Div([
 @app.callback(Output('output_div', 'children'),
               Input('interval_component', 'n_intervals'))
 def response_output(value):
-    result = telnet_connection()
-    t = datetime.now()
+    result: str = ""
+    try:
+        result = telnet_connection()
+    except Exception as ex:
+        # logger.critical(ex)
+        pass
+    time_ = datetime.now(pytz.timezone('Europe/Kyiv'))
+    t = time_ + timedelta(minutes=120)
     tt = t.strftime("%H:%M:%S")
     last_update = t.strftime("%d.%m.%Y %H:%M:%S")
-    # logger.info(f"{tt} - {result}")
+    sending_h = int(t.strftime("%H"))
+    sending_mins = t + timedelta(minutes=1)
+    sending_m = int(sending_mins.strftime("%M"))
+
     if result == "Success":
-            return html.Div(
+        # msg = f"{last_update} - VPN works fine!"
+        # try:
+        #     notification(msg, sending_h, sending_m)
+        # except Exception as ex:
+        #     logger.warning(ex)
+        #     pass
+        return html.Div(
                 style={'color': '#145A32'},
                 children=[
                     html.H3("Success"),
@@ -55,6 +72,12 @@ def response_output(value):
                     html.Br(),
                 ])
     elif result == "TimeoutError":
+        # msg = f"{last_update} - TimeoutError - The connection to the VPN is not working!"
+        # try:
+        #     notification(msg, sending_h, sending_m)
+        # except Exception as ex:
+        #     logger.warning(ex)
+        #     pass
         return html.Div(
             style={'color': 'red'},
             children=[
@@ -69,6 +92,12 @@ def response_output(value):
                 html.Br(),
             ])
     else:
+        # msg = f"{last_update} - OtherException - Something is wrong!"
+        # try:
+        #     notification(msg, sending_h, sending_m)
+        # except Exception as ex:
+        #     logger.warning(ex)
+        #     pass
         return html.Div(
             style={'color': 'red'},
             children=[
