@@ -20,7 +20,7 @@ app.layout = html.Div([
     Interval(
         id='interval_component',
         max_intervals=-1,
-        interval=1000*20,  # in milliseconds = (sec): 10
+        interval=1000*60,  # in milliseconds * seconds
         n_intervals=0,
     ),
     ],
@@ -78,9 +78,6 @@ def response_output(value):
                     html.H4(f'Last update: {last_update}'),
                     html.Br(),
                 ])
-
-
-# timer = RepeatTimer(10, reload)  # TODO Розібратись - не оновлює сторінку сайту
 
 
 if __name__ == '__main__':
