@@ -7,7 +7,7 @@ from loguru import logger
 from telnet_func import telnet_connection
 
 
-app = Dash(__name__, suppress_callback_exceptions=True)
+app = Dash(__name__)
 server = app.server
 
 app.layout = html.Div([
