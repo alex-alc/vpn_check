@@ -4,4 +4,3 @@ gunicorn
 loguru
 python-dotenv
 pytz
-pywhatkit
