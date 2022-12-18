@@ -1,5 +1,6 @@
 dash
 datetime
+gunicorn
 loguru
 python-dotenv
 pytz
