@@ -1,7 +1,6 @@
 # from loguru import logger
 from telnetlib import Telnet
 
-# host = "33.33.33.33"
 host = "46.149.176.84"  # VPN
 port = 1723
 timeout = 1
