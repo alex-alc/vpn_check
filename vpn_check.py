@@ -43,7 +43,7 @@ def response_output(value):
     except Exception as ex:
         # logger.critical(ex)
         pass
-    time_ = datetime.now(pytz.timezone('Europe/Kyiv'))
+    time_ = datetime.now()
     t = time_ + timedelta(minutes=120)
     tt = t.strftime("%H:%M:%S")
     last_update = t.strftime("%d.%m.%Y %H:%M:%S")
