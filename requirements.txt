@@ -1,5 +1,6 @@
 dash
 datetime
+gunicorn
 python-dotenv
 pytz
 pywhatkit
