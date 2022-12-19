@@ -15,14 +15,14 @@ server = app.server
 header = html.H4("Beskyd VPN Checking", className="card text-white bg-success mb-3", style="max-width: 20rem;")
 
 app.layout = html.Div(className="data-gr-ext-installed style class", children=[
+
 	html.Div(className="col-lg-8 offset-lg-2 col-md-6 offset-md-3 col-sm-6 offset-md-3", style={"textAlign": "center"}, children=[
 		html.Br(),
 		html.H1("Beskyd VPN Checking"),
 		html.Hr(),
 		html.Br(),
+		html.Div(id='output_div'),
 	]),
-
-	html.Div(id='output_div'),
 
 	Interval(
 		id='interval_component',
