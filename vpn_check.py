@@ -13,7 +13,7 @@ server = app.server
 
 app.layout = (html.Div(
 	className="data-gr-ext-installed style class", children=[
-		html.Div(className="col-6 offset-3", style={"textAlign": "center"}, children=[
+		html.Div(className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-xs-10 offset-xs-1", style={"textAlign": "center"}, children=[
 			html.Br(),
 			html.H1("Beskyd VPN Checking"),
 			html.Hr(),
