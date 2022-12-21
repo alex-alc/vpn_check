@@ -3,4 +3,5 @@ dash-bootstrap-components
 datetime
 gunicorn
 loguru
+ping3
 python-dotenv
